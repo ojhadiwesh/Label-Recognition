@@ -25,3 +25,4 @@ def signup():
             return redirect(url_for('uploaded_file',
                                     filename=filename))
     return render_template('signup.html')
+app.run(host='127.0.0.1', port=8080, debug=True)
