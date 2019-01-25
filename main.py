@@ -2,7 +2,7 @@
 import os
 import time
 import hashlib
-
+from pytesseract import image_to_string
 from flask import Flask, render_template, redirect, url_for, request
 from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 from flask_wtf import FlaskForm
