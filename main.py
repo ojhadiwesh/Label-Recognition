@@ -9,7 +9,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/label', methods=['GET','POST'])
+@app.route('/', methods=['GET','POST'])
 def signup():
     if request.method == 'POST':
          if 'file' not in request.files:
