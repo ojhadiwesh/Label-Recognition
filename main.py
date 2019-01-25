@@ -29,7 +29,7 @@ def upload_file():
     if form.validate_on_submit():
         for filename in request.files.getlist('photo'):
 
-            name = ('admin' + str(time.time())).hexdigest()[:15]
+            name = ('admin' + str(time.time()))[:15]
             photos.save(filename, name=name + '.')
         success = True
     else:
