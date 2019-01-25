@@ -46,7 +46,7 @@ def manage_file():
 
 @app.route('/open/<filename>')
 def open_file(filename):
-    file_text = image_to_string(Image.open(filename))
+    file_text = image_to_string(IMAGES.open(filename))
     file_url = photos.url(filename)
     return render_template('browser.html', file_url=file_url, file_text=file_text)
 
