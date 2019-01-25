@@ -19,6 +19,7 @@ def signup():
             flash('No file part')
             return redirect(request.url)
          file = request.files('file')
+         print(file.filename)
          if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
