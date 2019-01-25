@@ -28,5 +28,5 @@ def signup():
         #    filename = secure_filename(file.filename)
         #    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-    return render_template('capture.html')
+    return render_template('upload.php')
 app.run(host='127.0.0.1', port=8080, debug=True)
