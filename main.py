@@ -26,7 +26,6 @@ def signup():
          if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file',
-                                    filename=filename))
+            
     return render_template('capture.html')
 app.run(host='127.0.0.1', port=8080, debug=True)
