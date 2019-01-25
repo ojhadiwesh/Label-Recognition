@@ -8,7 +8,7 @@ from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_cl
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import SubmitField
-import Image
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'I have a dream'
