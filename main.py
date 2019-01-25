@@ -28,8 +28,8 @@ def upload_file():
     form = UploadForm()
     if form.validate_on_submit():
         for filename in request.files.getlist('photo'):
-            
-            name = hashlib.md5.update('admin' + str(time.time())).hexdigest()[:15]
+
+            name = hashlib.md5('admin' + str(time.time())).hexdigest()[:15]
             photos.save(filename, name=name + '.')
         success = True
     else:
