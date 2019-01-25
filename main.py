@@ -2,7 +2,7 @@
 import os
 import time
 import hashlib
-
+hashj= haslib.md5()
 from flask import Flask, render_template, redirect, url_for, request
 from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 from flask_wtf import FlaskForm
@@ -28,7 +28,9 @@ def upload_file():
     form = UploadForm()
     if form.validate_on_submit():
         for filename in request.files.getlist('photo'):
-            name = hashlib.md5('admin' + str(time.time())).hexdigest()[:15]
+            m = hashlib.md5()
+            m.update(filename.encode('utf-8'))
+            name = m('admin' + str(time.time())).hexdigest()[:15]
             photos.save(filename, name=name + '.')
         success = True
     else:
