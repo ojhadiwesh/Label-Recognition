@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, flash, redirect
 from pytesseract import image_to_string
 UPLOAD_FOLDER = '/static'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -15,7 +15,7 @@ def signup():
          if 'file' not in request.files:
             flash('No file part')
             return redirect(request.url)
-        file = request.files('file')
+         file = request.files('file')
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
