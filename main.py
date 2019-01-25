@@ -8,7 +8,8 @@ from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_cl
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import SubmitField
-
+from PIL import Image
+from io import BytesIO
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'I have a dream'
@@ -46,8 +47,9 @@ def manage_file():
 
 @app.route('/open/<filename>')
 def open_file(filename):
-    file_text = image_to_string(photos(filename))
+    file_text = image_to_string(photos.)
     file_url = photos.url(filename)
+    img = Image.open(BytesIO(file_url.content))
     return render_template('browser.html', file_url=file_url, file_text=file_text)
 
 
