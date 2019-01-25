@@ -1,32 +1,59 @@
-from flask import Flask, request, render_template, jsonify, flash, redirect, url_for
+# -*- coding: utf-8 -*-
 import os
+import time
+import hashlib
 
-from pytesseract import image_to_string
-UPLOAD_FOLDER = '/static'
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+from flask import Flask, render_template, redirect, url_for, request
+from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileRequired, FileAllowed
+from wtforms import SubmitField
 
 app = Flask(__name__)
-app.secret_key = "diwesh"
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+app.config['SECRET_KEY'] = 'I have a dream'
+app.config['UPLOADED_PHOTOS_DEST'] = os.getcwd() + '/static'
 
-@app.route('/', methods=['GET','POST'])
-def signup():
-    if request.method == 'POST':
-         if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-         file = request.files('file')
-         print(file.filename)
-         return image_to_string(file)
-         #if file.filename == '':
-        #    flash('No selected file')
-        #    return redirect(request.url)
-        # if file and allowed_file(file.filename):
-        #    filename = secure_filename(file.filename)
-        #    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+photos = UploadSet('photos', IMAGES)
+configure_uploads(app, photos)
+patch_request_class(app)  # set maximum file size, default is 16MB
 
-    return render_template('upload.php')
-app.run(host='127.0.0.1', port=8080, debug=True)
+
+class UploadForm(FlaskForm):
+    photo = FileField(validators=[FileAllowed(photos, u'Image Only!'), FileRequired(u'Choose a file!')])
+    submit = SubmitField(u'Upload')
+
+
+@app.route('/', methods=['GET', 'POST'])
+def upload_file():
+    form = UploadForm()
+    if form.validate_on_submit():
+        for filename in request.files.getlist('photo'):
+            name = hashlib.md5('admin' + str(time.time())).hexdigest()[:15]
+            photos.save(filename, name=name + '.')
+        success = True
+    else:
+        success = False
+    return render_template('index.html', form=form, success=success)
+
+
+@app.route('/manage')
+def manage_file():
+    files_list = os.listdir(app.config['UPLOADED_PHOTOS_DEST'])
+    return render_template('manage.html', files_list=files_list)
+
+
+@app.route('/open/<filename>')
+def open_file(filename):
+    file_url = photos.url(filename)
+    return render_template('browser.html', file_url=file_url)
+
+
+@app.route('/delete/<filename>')
+def delete_file(filename):
+    file_path = photos.path(filename)
+    os.remove(file_path)
+    return redirect(url_for('manage_file'))
+
+
+if __name__ == '__main__':
+    app.run(port =8080, debug=True)
