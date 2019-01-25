@@ -2,7 +2,6 @@
 import os
 import time
 import hashlib
-hashj= haslib.md5()
 from flask import Flask, render_template, redirect, url_for, request
 from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 from flask_wtf import FlaskForm
