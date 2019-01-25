@@ -1,4 +1,6 @@
-from flask import Flask, request, render_template, jsonify, flash, redirect
+from flask import Flask, request, render_template, jsonify, flash, redirect, url_for
+import os
+
 from pytesseract import image_to_string
 UPLOAD_FOLDER = '/static'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
