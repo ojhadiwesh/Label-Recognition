@@ -28,7 +28,7 @@ def upload_file():
     form = UploadForm()
     if form.validate_on_submit():
         for filename in request.files.getlist('photo'):
-            filename= filename.encode('utf-8')
+            
             name = hashlib.md5.update('admin' + str(time.time())).hexdigest()[:15]
             photos.save(filename, name=name + '.')
         success = True
