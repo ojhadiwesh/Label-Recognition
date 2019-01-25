@@ -20,12 +20,13 @@ def signup():
             return redirect(request.url)
          file = request.files('file')
          print(file.filename)
-         if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            
+         return image_to_string(file)
+         #if file.filename == '':
+        #    flash('No selected file')
+        #    return redirect(request.url)
+        # if file and allowed_file(file.filename):
+        #    filename = secure_filename(file.filename)
+        #    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
     return render_template('capture.html')
 app.run(host='127.0.0.1', port=8080, debug=True)
