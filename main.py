@@ -10,7 +10,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import SubmitField
 from PIL import Image
-from io import StringIO
+from io import BytesIO
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'I have a dream'
@@ -51,7 +51,7 @@ def open_file(filename):
 
     file_url = photos.url(filename)
     response = requests.get(file_url)
-    img = Image.open(StringIO(response.content))
+    img = Image.open(BytesIO(response.content))
     file_text = image_to_string(img)
     return render_template('browser.html', file_url=file_url)
 
