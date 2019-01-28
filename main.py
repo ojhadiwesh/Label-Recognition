@@ -49,8 +49,9 @@ def manage_file():
 def open_file(filename):
 
     file_url = photos.url(filename)
-    #img = Image.open(StringIO(file_url))
-    #file_text = image_to_string(img)
+    response = requests.get(file_url)
+    img = Image.open(StringIO(response.content))
+    file_text = image_to_string(img)
     return render_template('browser.html', file_url=file_url)
 
 
