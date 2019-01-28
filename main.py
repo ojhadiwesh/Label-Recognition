@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
-
+import google.cloud
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'I have a dream'
 @app.route('/image', methods=['GET', 'POST'])
