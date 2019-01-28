@@ -3,3 +3,6 @@ gunicorn
 google-cloud
 requests
 pytesseract
+flask_uploads
+flask_wtf
+wtforms
