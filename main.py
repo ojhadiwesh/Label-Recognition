@@ -3,6 +3,7 @@ import os
 import time
 import hashlib
 import requests
+import pytesseract
 from pytesseract import image_to_string
 from flask import Flask, render_template, redirect, url_for, request
 from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
