@@ -1,5 +1,5 @@
 from flask import Flask, request
-from google.cloud.vision as vision
+import google.cloud.vision as vision
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'I have a dream'
 @app.route('/', methods=['GET', 'POST'])
