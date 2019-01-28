@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+    # -*- coding: utf-8 -*-
 import os
 import time
 import hashlib
@@ -48,8 +48,8 @@ def manage_file():
 @app.route('/open/<filename>')
 def open_file(filename):
 
-    file_url = photos.url(filename)
-    img = Image.open(StringIO(file_url))
+    file_url = photos.open(filename)
+    #img = Image.open(StringIO(file_url))
     file_text = image_to_string(img)
     return render_template('browser.html', file_url=file_url, file_text=file_text)
 
