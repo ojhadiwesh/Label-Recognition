@@ -2,3 +2,12 @@ Flask
 gunicorn
 google-cloud
 requests
+pytesseract
+PIL
+io
+flask_uploads
+flask_wtf
+wtforms
+time
+os
+hashlib
