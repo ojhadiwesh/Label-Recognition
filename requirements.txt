@@ -3,7 +3,6 @@ gunicorn
 google-cloud
 requests
 pytesseract
-PIL
 io
 flask_uploads
 flask_wtf
