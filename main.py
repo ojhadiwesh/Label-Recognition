@@ -27,3 +27,4 @@ def detect_text(path):
 
         print('bounds: {}'.format(','.join(vertices)))
     return texts
+app.run(port =8080)
