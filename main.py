@@ -12,7 +12,7 @@ from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import SubmitField
 from PIL import Image
 from io import BytesIO
-pytesseract.pytesseract.tesseract_cmd = r'\home\sonwillogistics\env\lib\python3.5\site-packages\pytesseract\pytesseract.py'
+pytesseract.pytesseract.tesseract_cmd = r'\\home\\sonwillogistics\\env\\lib\\python3.5\\site-packages\\pytesseract\\pytesseract.py'
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'I have a dream'
 app.config['UPLOADED_PHOTOS_DEST'] = os.getcwd() + '/static'
