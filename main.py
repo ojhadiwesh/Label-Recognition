@@ -48,7 +48,7 @@ def manage_file():
 @app.route('/open/<filename>')
 def open_file(filename):
 
-    file_url = "https://8080-dot-5444348-dot-devshell.appspot.com/open/"" + filename
+    file_url = "https://8080-dot-5444348-dot-devshell.appspot.com/open/" + filename
     #img = Image.open(StringIO(file_url))
     #file_text = image_to_string(img)
     return render_template('browser.html', file_url=file_url)
