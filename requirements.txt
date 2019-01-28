@@ -3,10 +3,3 @@ gunicorn
 google-cloud
 requests
 pytesseract
-io
-flask_uploads
-flask_wtf
-wtforms
-time
-os
-hashlib
