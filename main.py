@@ -54,7 +54,7 @@ def open_file(filename):
     response = requests.get(file_url)
     img = Image.open(BytesIO(response.content))
     file_text = image_to_string(img)
-    return render_template('browser.html', file_url=file_url)
+    return render_template('browser.html', file_url=file_url, file_text=file_text)
 
 
 @app.route('/delete/<filename>')
