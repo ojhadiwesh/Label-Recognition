@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
-#import google.cloud
+from google.cloud import vision
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'I have a dream'
 @app.route('/', methods=['GET', 'POST'])
@@ -7,7 +7,7 @@ app.config['SECRET_KEY'] = 'I have a dream'
 def detect_text():
     path = request.args.get('url')
     """Detects text in the file."""
-    from google.cloud import vision
+
     client = vision.ImageAnnotatorClient()
 
     with io.open(path, 'rb') as image_file:
