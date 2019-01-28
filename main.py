@@ -2,10 +2,10 @@ from flask import Flask, render_template, redirect, url_for, request
 #import google.cloud
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'I have a dream'
-@app.route('/image', methods=['GET', 'POST'])
-
+@app.route('/', methods=['GET', 'POST'])
+path = request.args.get('url')
 def detect_text(path):
-    path = request.args.get('url')
+
     """Detects text in the file."""
     from google.cloud import vision
     client = vision.ImageAnnotatorClient()
@@ -27,3 +27,4 @@ def detect_text(path):
 
         print('bounds: {}'.format(','.join(vertices)))
     return texts
+app. run(port =8080)
