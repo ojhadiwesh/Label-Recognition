@@ -33,7 +33,7 @@ def upload_file():
     if form.validate_on_submit():
         for filename in request.files.getlist('photo'):
 
-            name = ('admin' + str(time.time()))[:15]
+            name = ('file' + str(time.time()))[:15]
             photos.save(filename, name=name + '.')
         success = True
     else:
@@ -41,6 +41,14 @@ def upload_file():
     return render_template('index.html', form=form, success=success)
 
 
+
+@app_route('/scan/<filename>')
+def scan_file(filename):
+    file_url = photos.url(filename)
+    response = requests.get(file_url)
+    img = Image.open(BytesIO(response.content))
+    file_text = image_to_string(img)
+    render_template('index.html', file_text = file_text)
 @app.route('/manage')
 def manage_file():
     files_list = os.listdir(app.config['UPLOADED_PHOTOS_DEST'])
