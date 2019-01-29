@@ -40,9 +40,7 @@ def upload_file():
         success = False
     return render_template('index.html', form=form, success=success)
 
-
-
-@app_route('/scan/<filename>')
+@app.route('/scan/<filename>')
 def scan_file(filename):
     file_url = photos.url(filename)
     response = requests.get(file_url)
