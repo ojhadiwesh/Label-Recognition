@@ -12,6 +12,7 @@ from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import SubmitField
 from PIL import Image
 from io import BytesIO
+from google.cloud import vision
 #pytesseract.pytesseract.tesseract_cmd = r'/home/sonwillogistics/env/lib/python3.5/site-packages/pytesseract/pytesseract.py'
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'I have a dream'
@@ -44,9 +45,28 @@ def upload_file():
 def scan_file(filename):
     file_url = photos.url(filename)
     response = requests.get(file_url)
-    img = Image.open(BytesIO(response.content))
-    file_text = image_to_string(img)
-    render_template('index.html', file_text = file_text)
+    """Detects text in the file."""
+
+    client = vision.ImageAnnotatorClient()
+
+    with io.open(path, 'rb') as image_file:
+        content = image_file.read()
+
+    image = vision.types.Image(content=content)
+
+    response = client.text_detection(image=image)
+    texts = response.text_annotations
+
+
+    for text in texts:
+        print('\n"{}"'.format(text.description))
+
+        vertices = (['({},{})'.format(vertex.x, vertex.y)
+                    for vertex in text.bounding_poly.vertices])
+
+        print('bounds: {}'.format(','.join(vertices)))
+
+    render_template('index.html', file_text = texts)
 @app.route('/manage')
 def manage_file():
     files_list = os.listdir(app.config['UPLOADED_PHOTOS_DEST'])
