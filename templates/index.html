@@ -6,8 +6,12 @@
 <hr>
 
 <form method="POST" enctype="multipart/form-data">
-  <input type="file" name="pic" accept="image/*">
-  <input type="submit">
+    {{ form.hidden_tag() }}
+    {{ form.photo(multiple="multiple")}}
+    {% for error in form.photo.errors %}
+        <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+    {{ form.submit }}
 </form>
 
 {% if success %}
