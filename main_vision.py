@@ -10,18 +10,6 @@ import time
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
-def upload_file():
-    form = UploadForm()
-    if form.validate_on_submit():
-        for filename in request.files.getlist('photo'):
-
-            name = ('file' + str(time.time()))[:15]
-            photos.save(filename, name=name + '.')
-        success = True
-    else:
-        success = False
-    return render_template('display.html', form=form, success=success)
 @app.route('/scan/<filename>', methods=['GET', 'POST'])
 def open_file(filename):
     image_url = requests.args.get('url')
