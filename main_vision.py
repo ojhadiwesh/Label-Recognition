@@ -9,18 +9,7 @@ import os
 import time
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'I have a dream'
 
-app.config['UPLOADED_PHOTOS_DEST'] = os.getcwd() + '/static'
-
-photos = UploadSet('photos', IMAGES)
-configure_uploads(app, photos)
-patch_request_class(app)  # set maximum file size, default is 16MB
-
-
-class UploadForm(FlaskForm):
-    photo = FileField(validators=[FileAllowed(photos, u'Image Only!'), FileRequired(u'Choose a file!')])
-    submit = SubmitField(u'Upload')
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     form = UploadForm()
@@ -35,11 +24,11 @@ def upload_file():
     return render_template('display.html', form=form, success=success)
 @app.route('/scan/<filename>', methods=['GET', 'POST'])
 def open_file(filename):
-    file_url = photos.url(filename)
+    image_url = requests.args.get('url')
     #path = requests.get(file_url)
     client = vision.ImageAnnotatorClient()
 
-    with io.open(file_url, 'rb') as image_file:
+    with io.open(image_url, 'rb') as image_file:
         content = image_file.read()
 
     image = vision.types.Image(content=content)

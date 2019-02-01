@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <title>Upload Picture</title>
-<h1>Upload File</h1>
-{% for photo in files_list %}
-    - {{ photo }}
-    <a href="{{ url_for('open_file', filename=photo) }}">open</a>
-{% endfor %}
+<h1>Upload Picture</h1>
 <hr>
 
 <form method="POST" enctype="multipart/form-data">
