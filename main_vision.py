@@ -28,4 +28,4 @@ def open_file(filename):
     return render_template('browser.html', file_url=file_url, file_text=texts)
 
 
-app. run(port =8080)
+app. run()
