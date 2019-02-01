@@ -1,8 +1,24 @@
 from flask import Flask, request
 from google.cloud import vision
+from flask import Flask, render_template, redirect, url_for, request
+from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileRequired, FileAllowed
+from wtforms import SubmitField
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'I have a dream'
 
+app.config['UPLOADED_PHOTOS_DEST'] = os.getcwd() + '/static'
+
+photos = UploadSet('photos', IMAGES)
+configure_uploads(app, photos)
+patch_request_class(app)  # set maximum file size, default is 16MB
+
+
+class UploadForm(FlaskForm):
+    photo = FileField(validators=[FileAllowed(photos, u'Image Only!'), FileRequired(u'Choose a file!')])
+    submit = SubmitField(u'Upload')
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     form = UploadForm()
