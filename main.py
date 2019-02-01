@@ -1,10 +1,7 @@
 from flask import Flask, request
-from google.cloud import vision
+
 from flask import Flask, render_template, redirect, url_for, request
-from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
-from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import SubmitField
+
 import os
 import time
 
