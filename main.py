@@ -14,7 +14,8 @@ import time
 app = Flask(__name__)
 
 @app.route('/scan', methods=['GET', 'POST'])
-def open_file(filename):
+def open_file():
+    photo_file= request.args.get('url')
     API_DISCOVERY_FILE = 'https://vision.googleapis.com/$discovery/rest?version=v1'
     http = httplib2.Http()
 
@@ -43,4 +44,3 @@ def open_file(filename):
         if 'labelAnnotations' in results:
             for annotations in results['labelAnnotations']:
                 return('Found label %s, score = %s' % (annotations['description'],annotations['score']))
-                
