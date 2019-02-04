@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 @app.route('/scan', methods=['GET', 'POST'])
 def open_file():
-    photo_file= request.args.get('url')
+    photo_file= 'http://www.areep.com/2010/misc/shippingLabels_files/Label_003.png'
     API_DISCOVERY_FILE = 'https://vision.googleapis.com/$discovery/rest?version=v1'
     http = httplib2.Http()
 
