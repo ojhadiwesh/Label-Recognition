@@ -1,9 +1,6 @@
 from flask import Flask, request
 from flask import Flask, render_template, redirect, url_for, request
-from googleapiclient import discovery
-from oauth2client import client
-from oauth2client.contrib import appengine
-from google.appengine.api import memcache
+
 import argparse
 import base64
 import httplib2
