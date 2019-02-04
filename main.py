@@ -44,6 +44,3 @@ def open_file(filename):
             for annotations in results['labelAnnotations']:
                 print('Found label %s, score = %s' % (annotations['description'],annotations['score']))
     return results
-
-
-app. run()
