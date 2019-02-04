@@ -42,5 +42,5 @@ def open_file(filename):
     for results in response['responses']:
         if 'labelAnnotations' in results:
             for annotations in results['labelAnnotations']:
-                print('Found label %s, score = %s' % (annotations['description'],annotations['score']))
-    return results
+                return('Found label %s, score = %s' % (annotations['description'],annotations['score']))
+                
