@@ -7,4 +7,4 @@ flask_uploads
 flask_wtf
 wtforms
 httplib2
-apiclient
+google-api-python-client
