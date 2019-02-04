@@ -43,7 +43,7 @@ def open_file(filename):
         if 'labelAnnotations' in results:
             for annotations in results['labelAnnotations']:
                 print('Found label %s, score = %s' % (annotations['description'],annotations['score']))
-    return render_template('browser.html', file_url=file_url, file_text=results['labelAnnotations'])
+    return results
 
 
 app. run()
