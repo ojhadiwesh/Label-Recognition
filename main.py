@@ -1,7 +1,6 @@
 from flask import Flask, request
 from flask import Flask, render_template, redirect, url_for, request
-from google.cloud import vision
-from google.cloud.vision import types
+
 import argparse
 import base64
 import httplib2
