@@ -43,4 +43,3 @@ def open_file():
         if 'text_annotations' in results:
             for annotations in results['text_annotations']:
                 return('Found label %s ' % (annotations['description']))
-app.run(port =8080)
