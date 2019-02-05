@@ -1,6 +1,7 @@
 from flask import Flask, request
 from flask import Flask, render_template, redirect, url_for, request
-
+from google.cloud import vision
+from google.cloud.vision import types
 import argparse
 import base64
 import httplib2
@@ -15,7 +16,7 @@ app = Flask(__name__)
 
 @app.route('/scan', methods=['GET', 'POST'])
 def open_file():
-    photo_file='/home/sonwillogistics/labelRecognition/static/admin1548704554.png'
+    image_file = request.files['file']
     API_DISCOVERY_FILE = 'https://vision.googleapis.com/$discovery/rest?version=v1'
     http = httplib2.Http()
 
@@ -25,7 +26,7 @@ def open_file():
 
     service = build('vision', 'v1', http, discoveryServiceUrl=API_DISCOVERY_FILE)
 
-    with open(photo_file, 'rb') as image:
+    with open(image_file, 'rb') as image:
         image_content = base64.b64encode(image.read())
         service_request = service.images().annotate(
         body={
