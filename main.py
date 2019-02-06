@@ -6,7 +6,8 @@ from google.cloud import vision
 
 
 import os
-import time
+import logging
+from datetime import datetime
 CLOUD_STORAGE_BUCKET = os.environ.get('CLOUD_STORAGE_BUCKET')
 app = Flask(__name__)
 
