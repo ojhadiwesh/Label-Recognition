@@ -1,11 +1,14 @@
 Flask
 gunicorn
-google-cloud
+google-cloud-vision==0.35.0
+google-cloud-storage==1.13.0
+google-cloud-datastore==1.7.1
 requests
 pytesseract
 flask_uploads
 flask_wtf
 wtforms
 httplib2
+apiclient
 google-api-python-client
 oauth2client
