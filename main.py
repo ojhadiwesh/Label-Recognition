@@ -67,7 +67,7 @@ def open_file():
             bound.vertices[2].x, bound.vertices[2].y,
             bound.vertices[3].x, bound.vertices[3].y,
             bound.vertices[0].x, bound.vertices[0].y],fill=color, width=width)
-    return image
+            return image
     def get_document_bounds(response, feature):
         for i,page in enumerate(document.pages):
             for block in page.blocks:
@@ -120,7 +120,7 @@ def open_file():
                                     text+='\t'
                                 if(symbol.property.detected_break.type==5):
                                     text+='\n'
-    return text
+        return text
 
     tracking_id =text_within(document, location.vertices[1].x, location.vertices[1].y, 30+location.vertices[1].x+(location.vertices[1].x-location.vertices[0].x),location.vertices[2].y)
 
