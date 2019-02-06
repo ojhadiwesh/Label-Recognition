@@ -127,4 +127,4 @@ def open_file():
     entity['tracking'] = tracking_id
     # Save the new entity to Datastore.
     datastore_client.put(entity)
-    return tracking_id
+    return document 
