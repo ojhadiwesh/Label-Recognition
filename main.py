@@ -35,27 +35,7 @@ def open_file():
     image = vision.types.Image(
         source=vision.types.ImageSource(gcs_image_uri=source_uri))
     document = vision_client.text_detection(image).full_text_annotation
-    # Create a Cloud Datastore client.
-    datastore_client = datastore.Client()
 
-    # Fetch the current date / time.
-    current_datetime = datetime.now()
-
-    # The kind for the new entity.
-    kind = 'labels'
-
-    # The name/ID for the new entity.
-    name = blob.name
-
-    # Create the Cloud Datastore key for the new entity.
-    key = datastore_client.key(kind, name)
-     # Construct the new entity using the key. Set dictionary values for entity
-    # keys blob_name, storage_public_url, timestamp, and text.
-    entity = datastore.Entity(key)
-    entity['blob_name'] = blob.name
-    entity['image_public_url'] = blob.public_url
-    entity['timestamp'] = current_datetime
-    entity['text'] = document
 
     # Save the new entity to Datastore.
     datastore_client.put(entity)
@@ -124,5 +104,25 @@ def open_file():
         return text
 
     tracking_id =text_within(document, location.vertices[1].x, location.vertices[1].y, 30+location.vertices[1].x+(location.vertices[1].x-location.vertices[0].x),location.vertices[2].y)
+    # Create a Cloud Datastore client.
+    datastore_client = datastore.Client()
 
+    # Fetch the current date / time.
+    current_datetime = datetime.now()
+
+    # The kind for the new entity.
+    kind = 'labels'
+
+    # The name/ID for the new entity.
+    name = blob.name
+
+    # Create the Cloud Datastore key for the new entity.
+    key = datastore_client.key(kind, name)
+     # Construct the new entity using the key. Set dictionary values for entity
+    # keys blob_name, storage_public_url, timestamp, and text.
+    entity = datastore.Entity(key)
+    entity['blob_name'] = blob.name
+    entity['image_public_url'] = blob.public_url
+    entity['timestamp'] = current_datetime
+    entity['tracking'] = tracking_id
     return tracking_id
