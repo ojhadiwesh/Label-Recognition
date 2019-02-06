@@ -17,8 +17,10 @@ app = Flask(__name__)
 def open_file():
     image_file = request.files['file']
     img_name= image_file.filename
-    UPLOAD_FOLDER= '/home/sonwillogisitcs/labelRecognition/static'
-    image_file.save(os.path.join(app.config['UPLOAD_FOLDER'], img_name))
+    fileDir = os.path.dirname(os.path.realpath('__file__'))
+    UPLOAD_FOLDER= os.path.join(fileDir, '../static')
+    UPLOAD_FOLDER= os.path.abspath(os.path.realpath(UPLOAD_FOLDER))
+    image_file.save(os.path.join(UPLOAD_FOLDER, img_name))
     API_DISCOVERY_FILE = 'https://vision.googleapis.com/$discovery/rest?version=v1'
     http = httplib2.Http()
 
