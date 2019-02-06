@@ -34,7 +34,8 @@ def open_file():
     source_uri = 'gs://{}/{}'.format(CLOUD_STORAGE_BUCKET, blob.name)
     image = vision.types.Image(
         source=vision.types.ImageSource(gcs_image_uri=source_uri))
-    document = vision_client.text_detection(image).full_text_annotation
+    response = vision_client.text_detection(image)
+    document= response.full_text_annotation
 
 
 
