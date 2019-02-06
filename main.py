@@ -45,17 +45,17 @@ def open_file():
     document= response.full_text_annotation
 
 
-
-    def draw_boxes(image, bounds, color,width=5):
-        draw = ImageDraw.Draw(image)
-        for bound in bounds:
-            draw.line([
-            bound.vertices[0].x, bound.vertices[0].y,
-            bound.vertices[1].x, bound.vertices[1].y,
-            bound.vertices[2].x, bound.vertices[2].y,
-            bound.vertices[3].x, bound.vertices[3].y,
-            bound.vertices[0].x, bound.vertices[0].y],fill=color, width=width)
-        return image
+    #
+    # def draw_boxes(image, bounds, color,width=5):
+    #     draw = ImageDraw.Draw(image)
+    #     for bound in bounds:
+    #         draw.line([
+    #         bound.vertices[0].x, bound.vertices[0].y,
+    #         bound.vertices[1].x, bound.vertices[1].y,
+    #         bound.vertices[2].x, bound.vertices[2].y,
+    #         bound.vertices[3].x, bound.vertices[3].y,
+    #         bound.vertices[0].x, bound.vertices[0].y],fill=color, width=width)
+    #     return image
     def get_document_bounds(response, feature):
         bounds=[]
         for i,page in enumerate(document.pages):
@@ -73,7 +73,7 @@ def open_file():
                             bounds.append(word.bounding_box)
         return bounds
     bounds=get_document_bounds(response, FeatureType.WORD)
-    image= draw_boxes(image,bounds, 'yellow')
+    # image= draw_boxes(image,bounds, 'yellow')
     def assemble_word(word):
         assembled_word=""
         for symbol in word.symbols:
