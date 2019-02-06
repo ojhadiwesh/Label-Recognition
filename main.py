@@ -13,10 +13,10 @@ import time
 
 app = Flask(__name__)
 
-@app.route('/scan', methods=['GET', 'POST'])
+@app.route('/scan', methods=['POST'])
 def open_file():
-    image_file = request.files.get('file')
-    img_name= image_file._safe_filename
+    image_file = request.files['file']
+    img_name= image_file.filename
     image_file.save(os.path.join(app.config['UPLOAD_FOLDER'], img_name))
     API_DISCOVERY_FILE = 'https://vision.googleapis.com/$discovery/rest?version=v1'
     http = httplib2.Http()
