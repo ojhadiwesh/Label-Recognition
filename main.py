@@ -37,8 +37,7 @@ def open_file():
     document = vision_client.text_detection(image).full_text_annotation
 
 
-    # Save the new entity to Datastore.
-    datastore_client.put(entity)
+
     def draw_boxes(image, bounds, color,width=5):
         draw = ImageDraw.Draw(image)
         for bound in bounds:
@@ -125,4 +124,6 @@ def open_file():
     entity['image_public_url'] = blob.public_url
     entity['timestamp'] = current_datetime
     entity['tracking'] = tracking_id
+    # Save the new entity to Datastore.
+    datastore_client.put(entity)
     return tracking_id
