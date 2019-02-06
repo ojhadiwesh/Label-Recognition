@@ -33,7 +33,7 @@ def open_file():
     source_uri = 'gs://{}/{}'.format(CLOUD_STORAGE_BUCKET, blob.name)
     image = vision.types.Image(
         source=vision.types.ImageSource(gcs_image_uri=source_uri))
-    document = vision_client.text_detection(image).full_text_annotations
+    document = vision_client.text_detection(image).full_text_annotation
     # Create a Cloud Datastore client.
     datastore_client = datastore.Client()
 
@@ -60,14 +60,14 @@ def open_file():
     datastore_client.put(entity)
     def draw_boxes(image, bounds, color,width=5):
         draw = ImageDraw.Draw(image)
-    for bound in bounds:
-        draw.line([
+        for bound in bounds:
+            draw.line([
             bound.vertices[0].x, bound.vertices[0].y,
             bound.vertices[1].x, bound.vertices[1].y,
             bound.vertices[2].x, bound.vertices[2].y,
             bound.vertices[3].x, bound.vertices[3].y,
             bound.vertices[0].x, bound.vertices[0].y],fill=color, width=width)
-            return image
+        return image
     def get_document_bounds(response, feature):
         for i,page in enumerate(document.pages):
             for block in page.blocks:
