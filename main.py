@@ -7,7 +7,7 @@ from google.cloud import vision
 
 import os
 import time
-
+CLOUD_STORAGE_BUCKET = os.environ.get('CLOUD_STORAGE_BUCKET')
 app = Flask(__name__)
 
 @app.route('/scan', methods=['POST'])
