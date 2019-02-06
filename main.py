@@ -1,6 +1,8 @@
 from flask import Flask, request
 from flask import Flask, render_template, redirect, url_for, request
-
+from google.cloud import datastore
+from google.cloud import storage
+from google.cloud import vision
 import argparse
 import base64
 import httplib2
