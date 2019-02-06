@@ -59,7 +59,7 @@ def open_file():
     # Save the new entity to Datastore.
     datastore_client.put(entity)
     def draw_boxes(image, bounds, color,width=5):
-    draw = ImageDraw.Draw(image)
+        draw = ImageDraw.Draw(image)
     for bound in bounds:
         draw.line([
             bound.vertices[0].x, bound.vertices[0].y,
