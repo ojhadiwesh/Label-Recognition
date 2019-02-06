@@ -115,7 +115,7 @@ def open_file():
                                 text+=symbol.text
                                 if(symbol.property.detected_break.type==1 or
                                 symbol.property.detected_break.type==3):
-                                text+=' '
+                                    text+=' '
                                 if(symbol.property.detected_break.type==2):
                                     text+='\t'
                                 if(symbol.property.detected_break.type==5):
