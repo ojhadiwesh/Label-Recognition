@@ -124,7 +124,7 @@ def open_file():
     entity['blob_name'] = blob.name
     entity['image_public_url'] = blob.public_url
     entity['timestamp'] = current_datetime
-    entity['tracking'] = tracking_id
+    # entity['text'] = tracking_id
     # Save the new entity to Datastore.
     datastore_client.put(entity)
-    return document 
+    return document
