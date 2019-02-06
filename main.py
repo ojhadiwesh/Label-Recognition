@@ -16,6 +16,8 @@ app = Flask(__name__)
 @app.route('/scan', methods=['GET', 'POST'])
 def open_file():
     image_file = request.files.get('file')
+    img_name= image_file._safe_filename
+    image_file.save(os.path.join(app.config['UPLOAD_FOLDER'], img_name))
     API_DISCOVERY_FILE = 'https://vision.googleapis.com/$discovery/rest?version=v1'
     http = httplib2.Http()
 
@@ -25,7 +27,7 @@ def open_file():
 
     service = build('vision', 'v1', http, discoveryServiceUrl=API_DISCOVERY_FILE)
 
-    with open(image_file, 'rb') as image:
+    with open(img_name, 'rb') as image:
         image_content = base64.b64encode(image.read())
         service_request = service.images().annotate(
         body={
