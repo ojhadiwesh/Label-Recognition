@@ -20,9 +20,9 @@ def open_file():
     # Get the bucket that the file will be uploaded to.
     bucket = storage_client.get_bucket(CLOUD_STORAGE_BUCKET)
      # Create a new blob and upload the file's content.
-    blob = bucket.blob(photo.filename)
+    blob = bucket.blob(image_file.filename)
     blob.upload_from_string(
-            photo.read(), content_type=photo.content_type)
+            photo.read(), content_type=image_file.content_type)
 
     # Make the blob publicly viewable.
     blob.make_public()
@@ -33,7 +33,7 @@ def open_file():
     source_uri = 'gs://{}/{}'.format(CLOUD_STORAGE_BUCKET, blob.name)
     image = vision.types.Image(
         source=vision.types.ImageSource(gcs_image_uri=source_uri))
-    labels = vision_client.text_detection(image).text_annotations
+    labels = vision_client.text_detection(image).full_text_annotations
     # Create a Cloud Datastore client.
     datastore_client = datastore.Client()
 
