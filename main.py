@@ -86,7 +86,7 @@ def open_file():
                     for word in paragraph.words:
                         assembled_word=assemble_word(word)
                         if(assembled_word==word_to_find):
-                            return word.bounding_box
+                            return block.paragraphs
 
     location=find_word_location(document,'TRACKING')
     def text_within(document,x1,y1,x2,y2):
