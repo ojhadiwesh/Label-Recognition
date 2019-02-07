@@ -37,7 +37,7 @@ def open_file():
      # Create a Cloud Vision client.
     vision_client = vision.ImageAnnotatorClient()
 
-    # Use the Cloud Vision client to detect a face for our image.
+    # Use the Cloud Vision client to detect text for our image.
     source_uri = 'gs://{}/{}'.format(CLOUD_STORAGE_BUCKET, blob.name)
     image = vision.types.Image(
         source=vision.types.ImageSource(gcs_image_uri=source_uri))
@@ -72,7 +72,7 @@ def open_file():
                         if (feature == FeatureType.WORD):
                             bounds.append(word.bounding_box)
         return bounds
-    bounds=get_document_bounds(response, FeatureType.PARA)
+    bounds=get_document_bounds(response, FeatureType.WORD)
     # image= draw_boxes(image,bounds, 'yellow')
     def assemble_word(word):
         assembled_word=""
@@ -86,9 +86,9 @@ def open_file():
                     for word in paragraph.words:
                         assembled_word=assemble_word(word)
                         if(assembled_word==word_to_find):
-                            return block.paragraphs
+                            return word.bounding_box
 
-    location=find_word_location(document,'TRACKING')
+    location=find_word_location(document,'Ship To')
     def text_within(document,x1,y1,x2,y2):
         text=""
         for page in document.pages:
@@ -111,7 +111,7 @@ def open_file():
                                     text+='\n'
         return text
 
-    tracking_id =text_within(document, location.vertices[1].x, location.vertices[1].y, 30+location.vertices[1].x+(location.vertices[1].x-location.vertices[0].x),location.vertices[2].y)
+    ship_to =text_within(document, location.vertices[1].x, location.vertices[1].y, 30+location.vertices[1].x+(location.vertices[1].x-location.vertices[0].x),location.vertices[2].y)
     # Create a Cloud Datastore client.
     datastore_client = datastore.Client()
 
@@ -132,7 +132,7 @@ def open_file():
     entity['blob_name'] = blob.name
     entity['image_public_url'] = blob.public_url
     entity['timestamp'] = current_datetime
-    entity['tracking'] = tracking_id
+    entity['ship_to'] = ship_to
     # Save the new entity to Datastore.
     datastore_client.put(entity)
-    return tracking_id
+    return ship_to
