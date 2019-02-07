@@ -72,7 +72,7 @@ def open_file():
                         if (feature == FeatureType.WORD):
                             bounds.append(word.bounding_box)
         return bounds
-    bounds=get_document_bounds(response, FeatureType.WORD)
+    bounds=get_document_bounds(response, FeatureType.PARA)
     # image= draw_boxes(image,bounds, 'yellow')
     def assemble_word(word):
         assembled_word=""
