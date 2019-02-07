@@ -88,8 +88,8 @@ def open_file():
                         if(assembled_word==word_to_find):
                             return block.bounding_box
 
-    
-    location=find_word_location(document,'Ship To')
+
+    location=find_word_location(document,'Ship')
     def text_within(document,x1,y1,x2,y2):
         text=""
         for page in document.pages:
