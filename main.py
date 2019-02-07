@@ -86,8 +86,9 @@ def open_file():
                     for word in paragraph.words:
                         assembled_word=assemble_word(word)
                         if(assembled_word==word_to_find):
-                            return word.bounding_box
+                            return block.bounding_box
 
+    
     location=find_word_location(document,'Ship To')
     def text_within(document,x1,y1,x2,y2):
         text=""
