@@ -86,7 +86,7 @@ def open_file():
                     for word in paragraph.words:
                         assembled_word=assemble_word(word)
                         if(assembled_word==word_to_find):
-                            return block.bounding_box
+                            return word.bounding_box
 
 
     location=find_word_location(document,'Ship')
